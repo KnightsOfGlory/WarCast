@@ -1,3 +1,5 @@
+package modules
+
 import dev.kord.common.entity.DiscordChannel
 import dev.kord.common.entity.Snowflake
 import dev.kord.core.Kord
@@ -7,7 +9,7 @@ import dev.kord.gateway.Intent
 import dev.kord.gateway.PrivilegedIntent
 import dev.kord.rest.service.RestClient
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
+import utilities.Logger
 
 object Discord {
 
@@ -22,10 +24,13 @@ object Discord {
             runBlocking {
                 kord = Kord(token)
 
+                Logger.info("Subscribing to Discord messages...")
                 kord.on<MessageCreateEvent> {
+                    Logger.discord(message)
+
                     val snowflake = message.channelId
                     val username = message.author?.username
-                    val talk = message.content
+                    val talk = message.content.take(237)
 
                     if (username != "WarCast") {
                         val send = "<$username> $talk"
@@ -35,6 +40,7 @@ object Discord {
                     }
                 }
 
+                Logger.info("Logging in to Discord...")
                 kord.login {
                     @OptIn(PrivilegedIntent::class)
                     intents += Intent.MessageContent

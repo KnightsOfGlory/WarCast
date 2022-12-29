@@ -1,5 +1,9 @@
+package modules
+
 import dev.kord.common.entity.DiscordChannel
 import kotlinx.coroutines.runBlocking
+import modules.Handler
+import utilities.Logger
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.PrintWriter
@@ -17,9 +21,13 @@ class Warnet(
 
     override fun run() {
         while (true) {
-            connect()
-            login()
-            loop()
+            try {
+                connect()
+                login()
+                loop()
+            } catch (t: Throwable) {
+                Logger.error(t.message ?: "Unknown exception")
+            }
         }
     }
 
@@ -28,6 +36,8 @@ class Warnet(
     private lateinit var reader: BufferedReader
 
     private fun connect() {
+        Logger.info("[WARNET] Connecting @$username for #$home...")
+
         val address = InetSocketAddress(server, port)
 
         socket = Socket()
@@ -37,6 +47,7 @@ class Warnet(
     }
 
     private fun login() {
+        Logger.info("[WARNET] Logging in @$username for #$home...")
         writer.println("C1\r\n")
         writer.println("ACCT ${username}\r\n")
         writer.println("PASS ${password}\r\n")

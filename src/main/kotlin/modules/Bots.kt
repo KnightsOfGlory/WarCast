@@ -1,4 +1,7 @@
+package modules
+
 import dev.kord.common.entity.Snowflake
+import utilities.Logger
 import utilities.StringHelper
 
 object Bots {
@@ -11,8 +14,10 @@ object Bots {
         val pattern = System.getenv("WARNET_USERNAME_PATTERN")
         val password = System.getenv("WARNET_PASSWORD")
 
+        Logger.info("Pulling Discord channel category...")
         val warcast = Discord.warcast()
 
+        Logger.info("Creating bots...")
         val channels = Discord.channels()
         bots = channels
             .filter { channel ->
@@ -31,6 +36,7 @@ object Bots {
                 )
             }
 
+        Logger.info("Connecting bots...")
         bots.forEach {
             val thread = Thread(it)
             thread.start()

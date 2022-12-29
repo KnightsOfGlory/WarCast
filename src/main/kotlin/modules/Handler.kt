@@ -1,4 +1,7 @@
+package modules
+
 import utilities.ChatHelper
+import utilities.Logger
 import utilities.ProtocolHelper
 
 object Handler {
@@ -7,6 +10,9 @@ object Handler {
         if (message.startsWith("PING")) {
             val tokens = message.split(" ")
             val cookie = tokens[1]
+
+            Logger.info("Responding to ping $cookie")
+
             bot.send("/pong $cookie")
             return
         }
@@ -17,6 +23,8 @@ object Handler {
             if (user == bot.username) return
             if (ChatHelper.isAntiIdle(talk)) return
 
+            Logger.warnet(bot.home, bot.username, talk)
+
             Discord.send(bot.channel, "<**$user**> $talk")
             return
         }
@@ -26,6 +34,8 @@ object Handler {
             val emote = ProtocolHelper.parseQuoted(message)
             if (user == bot.username) return
             if (ChatHelper.isAntiIdle(emote)) return
+
+            Logger.warnet(bot.home, bot.username, emote)
 
             Discord.send(bot.channel, "<**$user**> _${emote}_")
             return
