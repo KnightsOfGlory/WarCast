@@ -6,10 +6,10 @@ object Bots {
     lateinit var bots: List<Warnet>
 
     suspend fun connect() {
-        val server = "ash.wserv.org"
+        val server = System.getenv("WARNET_SERVER")
         val port = 6112
-        val pattern = "WarCast-"
-        val password = ""
+        val pattern = System.getenv("WARNET_USERNAME_PATTERN")
+        val password = System.getenv("WARNET_PASSWORD")
 
         val warcast = Discord.warcast()
 

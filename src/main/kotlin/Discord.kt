@@ -11,8 +11,8 @@ import kotlinx.coroutines.withContext
 
 object Discord {
 
-    private val token = ""
-    private val guild = Snowflake("1057814485513027694")
+    private val token = System.getenv("DISCORD_TOKEN")
+    private val guild = Snowflake(System.getenv("DISCORD_GUILD_ID"))
 
     private lateinit var kord: Kord
     private var rest = RestClient(token)
@@ -57,7 +57,7 @@ object Discord {
     }
 
     suspend fun warcast(): DiscordChannel {
-        return channels().filter { it.name.value == "WarCast" }.first()
+        return channels().filter { it.name.value == System.getenv("DISCORD_CHANNEL_CATEGORY") }.first()
     }
 
     suspend fun channels(): List<DiscordChannel> {

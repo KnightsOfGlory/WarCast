@@ -12,7 +12,7 @@ object ChatHelper {
     )
 
     fun isAntiIdle(message: String): Boolean {
-        if (message.startsWith("starts with: is a SphtBot - Bot")) return true
+        if (message.startsWith("is a SphtBot - Bot")) return true
 
         return antiIdles.contains(message)
     }
