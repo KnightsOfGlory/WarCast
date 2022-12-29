@@ -32,7 +32,7 @@ object Bots {
                     port,
                     username,
                     password,
-                    channel.name.value!!
+                    channel.name.value!!.replace("-", " ")
                 )
             }
 
