@@ -2,13 +2,14 @@ package modules
 
 import dev.kord.common.entity.DiscordChannel
 import kotlinx.coroutines.runBlocking
-import modules.Handler
 import utilities.Logger
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.io.OutputStreamWriter
 import java.io.PrintWriter
 import java.net.InetSocketAddress
 import java.net.Socket
+import java.nio.charset.StandardCharsets
 
 class Warnet(
     val channel: DiscordChannel,
@@ -42,7 +43,11 @@ class Warnet(
 
         socket = Socket()
         socket.connect(address)
-        writer = PrintWriter(socket.getOutputStream(), true)
+        writer = PrintWriter(
+            OutputStreamWriter(
+                socket.getOutputStream(), StandardCharsets.UTF_8
+            ), true
+        )
         reader = BufferedReader(InputStreamReader(socket.inputStream))
     }
 

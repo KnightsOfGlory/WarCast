@@ -1,5 +1,6 @@
 package modules
 
+import com.vdurmont.emoji.EmojiParser
 import dev.kord.common.entity.DiscordChannel
 import dev.kord.common.entity.Snowflake
 import dev.kord.core.Kord
@@ -30,7 +31,8 @@ object Discord {
 
                     val snowflake = message.channelId
                     val username = message.author?.username
-                    val talk = message.content.take(237)
+                    val talk = EmojiParser.parseToAliases(message.content).take(237)
+
 
                     if (username != "WarCast") {
                         val send = "<$username> $talk"
