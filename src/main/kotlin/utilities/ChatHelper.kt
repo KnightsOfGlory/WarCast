@@ -9,7 +9,8 @@ object ChatHelper {
         "Its Hammer Time :) - DC v1.3b1 [Private Edition]",
         "Its Hammer Time :) - DC v1.3b1 [Private Edition].",
         ":+:~EwR 4 LyFe~:+: - Ghost 3.02",
-        "-[ +|{W+ ]-[ Subaru Version 1.3.5 MoonGlade Series ]-"
+        "-[ +|{W+ ]-[ Subaru Version 1.3.5 MoonGlade Series ]-",
+        "is a Death Chat v0.8 by Unknown [Shinigami Edition]."
     )
 
     private val hmms = listOf(
